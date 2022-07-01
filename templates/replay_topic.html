@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static%}    
+{%block title%}
+<title>Replay of {{topic.subject}}</title>
+{%endblock%}
+
+{%block breadcrumb%}
+    <li class="breadcrumb-item "><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item "><a href="{% url 'board_topics' topic.board.pk %}">{{topic.board.name}}</a></li>
+
+        <li class="breadcrumb-item active">{{topic.subject}}</li>
+        <li class="breadcrumb-item active">Post Replay</li>
+
+{%endblock%}
+
+
+{%block content%}
+<form method="post" class="mb-4">
+    {%csrf_token%}
+    {%include 'includes/form.html'%}
+</form>
+
+{%for post in topic.posts.all%}
+
+{%%endfor}
+{%endblock%}

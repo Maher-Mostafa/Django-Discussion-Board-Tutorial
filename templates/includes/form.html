@@ -1,0 +1,38 @@
+<!-- # pip3 install django_widget_tweaks   هذه مكتبة يجب تحميلها لاستخدام البوت ستراب
+# ويجب اضافة هذه المكتبة فى فايل الاعدادات مع Installed_Apps -->
+
+{% load widget_tweaks %}
+{%if form.non_field_errors%}
+<div class="alert alert-danger" role="alerts">
+{%for error in form.non_field_errors%}
+<p {%if forloop.last%}  {%endif%}>{{error}}</p>
+{%endfor%}
+</div>
+{%endif%}  
+
+<!-- هنعمل حلقة باستخدام فور لوب تلف على الفيلدس فيلد فيلد field by field -->
+{%for field in form %}
+<div class="form-group" >
+    {{field.label_tag}}
+
+    <!-- بيشوف هل الفورم دى فيها بيانات ولا لا -->
+    {%if form.is_bound%}  
+        {%if field.errors%}
+            {%render_field field class="form-control is-invalid" %}
+            {%for error in field.errors %}
+                <div class="invalide-feedback">{{error}}</div>
+            {%endfor%}
+        {%else%}
+        {%render_field field class="form-control is-valid" %}
+
+        {%endif%}
+    {%else%}
+    {%render_field field class="form-control"%}
+    {%endif%}
+</div>
+{%if field.help_text%}
+    <small class="form-text text-muted">
+        {{field.help_text}}
+    </small>
+{%endif%}
+{%endfor%}

@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<div class="container">
+    <h1>Login</h1>
+    <div class="row justify-content-center">
+        <div class="col-log-8 col-md-10 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Log In</h3>
+                    <form method="post" novalidate>
+                        {%csrf_token%}
+                        <!-- {{form.as_p}} -->
+                        <!-- كدا انا عملت انبت تيب مخفى عندى هيكون موجود فى العنوان علشان لما اعمل تسجيل بالدخول يودينى على اخر صفحة انا كنت واقف عليها مش يودينى على الصفحة الرئيسية -->
+                        <input type="hidden" name="next" value="{{ next }}">   
+                        {%include 'includes/form.html'%}
+                        <button type="submit" class="btn btn-primary">Create New User</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center"> Create New Account <a href="{%url 'signup'%}">Sign Up</a> </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock body%} 

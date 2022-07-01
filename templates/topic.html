@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static%}    
+{%block title%}
+<title>{{board.name}}</title>
+{%endblock%}
+
+{%block breadcrumb%}
+    <li class="breadcrumb-item "><a href="{% url 'home' %}">Boards</a></li>
+        <li class="breadcrumb-item active">{{board.name}}</li>
+{%endblock%}
+
+
+{%block content%}
+<table class="table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Topic</th>
+            <th>Posts</th>
+            <th>views</th>
+            <th>created_by</th>
+            <th>created_dt</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for topic in board.topics.all%}
+            <tr>
+                <td>{{topic.subject}}</td>
+                <td>0</td>
+                <td>0</td>
+                <td>{{topic.created_by.username}}</td>
+                <td>{{topic.created_dt}}</td>
+
+            </tr>
+        {%endfor%}
+    </tbody>
+
+</table>
+{%endblock%}

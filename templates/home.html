@@ -1,0 +1,48 @@
+<!-- اعلم تحميل لفولدر ال static -->
+
+{% extends 'base.html' %}   
+
+{%block title%}
+<title>Boards</title>
+{%endblock%}
+    
+
+{%block breadcrumb%}
+    <li class="breadcrumb-item active">Boards</li>
+{%endblock%}
+
+{%block content%}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Board</th>
+        <th>Posts</th>
+        <th>Topic</th>
+        <th>Last Post</th>
+    </tr>
+    </thead>
+    <tbody>
+<!-- jinja style help us to write python in html -->
+    {% for board in boards %}    
+    <tr>
+        <td><a href="{% url 'board_topics' board.pk %}">{{board.name}}</a>
+        <small class="text-muted d-block">{{board.description}}</small>
+        </td>
+        <td>{{board.get_posts_count}}</td>
+        <td>{{board.topics.count}}</td>
+        <td>
+            {%if post%}
+            {%with post=board.get_last_post%}
+            by {{post.created_by.username}} at {{post.created_dt}}
+            {%endwith%}
+            {%else%}
+            <small>No Posts</small>
+            {%endif%}
+        </td>
+    </tr>
+    {%endfor%}
+
+    </tbody>
+</table>
+{%endblock%}
+
